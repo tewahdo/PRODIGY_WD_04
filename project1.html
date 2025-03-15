@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1</title>
+    <link rel="stylesheet" href="project1.css">
+    <script defer src="project1.js"></script>
+</head>
+<body>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+                text-align: center;
+            }
+            header {
+                background-color: #2c3e50;
+                color: white;
+                padding: 20px;
+            }
+            nav ul {
+                list-style: none;
+                padding: 0;
+                
+            }
+            nav ul li {
+                display: inline;
+                margin: 0 15px;
+               
+            }
+            nav ul li a:hover {
+                color: red;
+                text-decoration: none;
+            }
+            section {
+                padding: 20px;
+            }
+            #home {
+                background: url(img/2aadef4c1eb1c58f092ee1ad456c15d0.jpg) no-repeat center center/cover;
+                color: red;
+                padding: 100px 20px;
+                height: 400px;
+            }
+            .destination {
+                display: inline-block;
+                width: 30%; /* Responsive width */
+                margin: 15px;
+                padding: 20px;
+                border-radius: 10px;
+                color: white;
+                transition: transform 0.3s, box-shadow 0.3s;
+                text-align: left;
+                background-color: rgba(44, 62, 80, 0.8); /* Semi-transparent background */
+            }
+            .destination:hover {
+                transform: scale(1.05); /* Scale effect on hover */
+                box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            }
+            .destination.lalibela {
+                background-color: rgba(231, 76, 60, 0.8); /* Red */
+            }
+            .destination.danakil {
+                background-color: rgba(243, 156, 18, 0.8); /* Orange */
+            }
+            .destination.axum {
+                background-color: rgba(41, 128, 185, 0.8); /* Blue */
+            }
+            .gallery-category {
+                margin-top: 20px;
+            }
+            .gallery-container img {
+                width: 200px;
+                margin: 10px;
+                border-radius: 10px;
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+            .gallery-container img:hover {
+                transform: scale(1.1);
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            }
+            form input, form textarea {
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+                padding: 10px;
+            }
+            button {
+                background-color: #2c3e50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+            }
+            footer {
+                background-color: #2c3e50;
+                color: white;
+                padding: 10px;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to Tour Ethiopia</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#destinations">Destinations</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section id="home">
+            
+        </section>
+        
+        <section id="destinations">
+            <h2>Top Destinations</h2>
+            <div class="destination lalibela">
+                <h3>Lalibela</h3>
+                <p>Famous for its rock-hewn churches.</p>
+            </div>
+            <div class="destination danakil">
+                <h3>Danakil Depression</h3>
+                <p>The Danakil Depression is one of the hottest, lowest, and driest places on the planet. Home to salt lakes, lava lakes, volcanoes, and neon acid springs.</p>
+            </div>
+            <div class="destination axum">
+                <h3>Axum</h3>
+                <p>Famous for its Stelae field, where giant obelisks rise into the sky. A UNESCO World Heritage Site since 1980.</p>
+            </div>
+        </section>
+        
+        <section id="gallery">
+            <h2>Gallery</h2>
+            
+            <div class="gallery-category">
+                <h3>Places</h3>
+                <div class="gallery-container">
+                    <img src="img/lalibela.jpg" alt="Lalibela">
+                    <img src="img/dankil.jpg" alt="Danakil Depression">
+                    <img src="img/cdce9674c3fc0b95844f9ca81ad1069c.jpg" alt="Axum">
+                </div>
+            </div>
+            
+            <div class="gallery-category">
+                <h3>Traditional Food</h3>
+                <div class="gallery-container">
+                    <img src="img/injera.jpg" alt="Injera">
+                    <img src="img/doro.jpg" alt="Doro Wat">
+                    <img src="img/kitfo.jpg" alt="Kitfo">
+                </div>
+            </div>
+            
+            <div class="gallery-category">
+                <h3>Traditional Clothes</h3>
+                <div class="gallery-container">
+                    <img src="img/2b58d5d59e81e5cc36b9b8693648ee35.jpg" alt="Habesha Kemis">
+                    <img src="img/men.jpg" alt="">
+                    <img src="img/gabi.jpg" alt="Gabi">
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+        
+        <footer>
+            <p>&copy; 2025 Tour Ethiopia. All Rights Reserved.</p>
+        </footer>
+        
+        <script>
+            document.getElementById("contact-form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                let name = document.getElementById("name").value;
+                let email = document.getElementById("email").value;
+                let message = document.getElementById("message").value;
+                
+                if (name && email && message) {
+                    alert("Thank you, " + name + "! Your message has been sent.");
+                    document.getElementById("contact-form").reset();
+                } else {
+                    alert("Please fill out all fields.");
+                }
+            });
+        </script>
+    </body>
+    </html>
+
+
+
+
+    
+</body>
+</html>

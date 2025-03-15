@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 3</title>
+    <link rel="stylesheet" href="project3.css">
+    <script defer src="project3.js"></script>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            background-color: #87CEEB;
+        }
+        #gameContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+        }
+        .basket {
+            position: absolute;
+            bottom: 20px;
+            width: 80px;
+            height: 40px;
+            background-color: brown;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .object {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        #scoreboard {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #gameOverScreen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div class="basket" id="basket"></div>
+        <div id="scoreboard">Score: 0 | Misses: 0</div>
+        <div id="gameOverScreen">Game Over!<br>Final Score: <span id="finalScore"></span><br><button onclick="restartGame()">Restart</button></div>
+    </div>
+    <script>
+        const basket = document.getElementById("basket");
+        const gameContainer = document.getElementById("gameContainer");
+        const scoreboard = document.getElementById("scoreboard");
+        const gameOverScreen = document.getElementById("gameOverScreen");
+        const finalScore = document.getElementById("finalScore");
+        
+        let basketPosition = window.innerWidth / 2;
+        let score = 0;
+        let misses = 0;
+        const maxMisses = 10;
+        let gameOver = false;
+        
+        document.addEventListener("keydown", (event) => {
+            if (gameOver) return;
+            if (event.key === "ArrowLeft" && basketPosition > 10) {
+                basketPosition -= 20;
+            } else if (event.key === "ArrowRight" && basketPosition < window.innerWidth - 90) {
+                basketPosition += 20;
+            }
+            basket.style.left = basketPosition + "px";
+        });
+        
+        function createFallingObject() {
+            if (gameOver) return;
+            const object = document.createElement("div");
+            object.classList.add("object");
+            object.style.left = Math.random() * (window.innerWidth - 30) + "px";
+            gameContainer.appendChild(object);
+            let objectTop = 0;
+            
+            const fallInterval = setInterval(() => {
+                objectTop += 5;
+                object.style.top = objectTop + "px";
+                
+                if (objectTop > window.innerHeight - 60 &&
+                    parseInt(object.style.left) > basketPosition - 40 &&
+                    parseInt(object.style.left) < basketPosition + 80) {
+                    score++;
+                    updateScoreboard();
+                    clearInterval(fallInterval);
+                    object.remove();
+                }
+                
+                if (objectTop > window.innerHeight) {
+                    misses++;
+                    updateScoreboard();
+                    clearInterval(fallInterval);
+                    object.remove();
+                    if (misses >= maxMisses) {
+                        endGame();
+                    }
+                }
+            }, 20);
+        }
+        
+        function updateScoreboard() {
+            scoreboard.textContent = `Score: ${score} | Misses: ${misses}`;
+        }
+        
+        function endGame() {
+            gameOver = true;
+            finalScore.textContent = score;
+            gameOverScreen.style.display = "block";
+        }
+        
+        function restartGame() {
+            gameOver = false;
+            score = 0;
+            misses = 0;
+            updateScoreboard();
+            gameOverScreen.style.display = "none";
+        }
+        
+        setInterval(createFallingObject, 1000);
+    </script>
+
+
+    
+</body>
+</html>
